@@ -52,8 +52,8 @@ export const errorHandler = error => {
   return { type: ERROR, error: error }
 }
 
-export const fetchUsers = () => {
-  return thunk = (dispatch, getStore) => {
+export function fetchUsers() {
+  return function thunk (dispatch, getStore){
     return axios.get('/api/users')
       .then( res => res.data )
       .then( users => {
