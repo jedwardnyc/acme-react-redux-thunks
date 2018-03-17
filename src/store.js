@@ -63,8 +63,8 @@ export function fetchUsers() {
   } 
 }
 
-export const addUser = (user) => {
-  return thunk = (dispatch) => {
+export function addUser(user){
+  return function thunk (dispatch, getStore){
     return axios.post('/api/users', { name: user })
       .then( res => res.data )
       .then( user => {
@@ -75,8 +75,8 @@ export const addUser = (user) => {
   }
 }
 
-export const deleteUser = (user) => {
-  return thunk = (dispatch) => {
+export function deleteUser(user){
+  return function thunk (dispatch, getStore){
     return axios.delete(`/api/users/${user.id}`)
       .then( res => res.data )
       .then( () => {
@@ -86,16 +86,16 @@ export const deleteUser = (user) => {
   }
 }
 
-export const fetchUser = (id) => {
-  return thunk = (dispatch) => {
+export function fetchUser(id){
+  return function thunk (dispatch, getStore){
     return axios.get(`/api/users/${id}`)
       .then( res => res.data )
       .then( user => dispatch(getUser(user.name)))
   }
 }
 
-export const updateUser = (id, user) => {
-  return thunk = (dispatch) => {
+export function updateUser(id, user){
+  return function thunk (dispatch, getStore){
     return axios.put(`/api/users/${this.props.id}`, { name: user })
       .then( res => res.data )
       .then( () => document.location.hash ='/')
