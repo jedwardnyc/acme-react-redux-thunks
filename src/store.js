@@ -101,6 +101,6 @@ export const updateUser = (id, user) => {
   }
 }
 
-const store = createStore(reducer, applyMiddleware());
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 export default store;
 
