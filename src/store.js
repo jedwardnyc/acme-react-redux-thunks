@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import  thunkMiddleware  from 'redux-thunk';
+import axios from 'axios';
 
 const GOT_USERS_FROM_SERVER = 'GOT_USERS_FROM_SERVER';
 const WRITE_USER = 'WRITE_USER';
@@ -52,7 +53,7 @@ export const errorHandler = error => {
 }
 
 export const fetchUsers = () => {
-  return thunk = (dispatch) => {
+  return thunk = (dispatch, getStore) => {
     return axios.get('/api/users')
       .then( res => res.data )
       .then( users => {
