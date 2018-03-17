@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import store, { getUser, getUsers, getNewUsers, clear, errorHandler } from "../store";
+import store, { getUser, getUsers, getNewUsers, clear, errorHandler, fetchUsers, addUser, deleteUser } from "../store";
 import axios from 'axios';
 
 export default class Users extends React.Component{
@@ -12,12 +12,13 @@ export default class Users extends React.Component{
   }
 
   componentDidMount(){
-    axios.get('/api/users')
-      .then( res => res.data )
-      .then( users => {
-        store.dispatch(getUsers(users))
-      })
-      .catch(err => store.dispatch(errorHandler(err.response.data)))
+    // axios.get('/api/users')
+    //   .then( res => res.data )
+    //   .then( users => {
+    //     store.dispatch(getUsers(users))
+    //   })
+    //   .catch(err => store.dispatch(errorHandler(err.response.data)))
+    store.dispatch(fetchUsers())
     this.unsubscribe = store.subscribe( () => this.setState(store.getState()))
   }
 
@@ -32,23 +33,25 @@ export default class Users extends React.Component{
   handleSubmit(ev){
     ev.preventDefault()
     const user = this.state.user;
-    axios.post('/api/users', { name: user })
-      .then( res => res.data )
-      .then( user => {
-        store.dispatch(getNewUsers(user)) 
-        store.dispatch(clear()) 
-      })
-      .catch(err => store.dispatch(errorHandler(err.response.data)))
+    // axios.post('/api/users', { name: user })
+    //   .then( res => res.data )
+    //   .then( user => {
+    //     store.dispatch(getNewUsers(user)) 
+    //     store.dispatch(clear()) 
+    //   })
+    //   .catch(err => store.dispatch(errorHandler(err.response.data)))
+    store.dispatch(addUser(user));
   }
 
   handleDelete(ev, user){
     ev.preventDefault()
-    axios.delete(`/api/users/${user.id}`)
-      .then( res => res.data )
-      .then( () => {
-        const users = this.state.users.filter(_user => _user.id === user.id*1 ? false : true)
-        store.dispatch(getUsers(users)) 
-      })
+    // axios.delete(`/api/users/${user.id}`)
+    //   .then( res => res.data )
+    //   .then( () => {
+    //     const users = this.state.users.filter(_user => _user.id === user.id*1 ? false : true)
+    //     store.dispatch(getUsers(users)) 
+    //   })
+    store.dispatch(deleteUser(user))
   }
 
   render(){

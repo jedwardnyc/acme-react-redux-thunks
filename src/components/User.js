@@ -1,5 +1,5 @@
 import React from 'react';
-import store, { getUser, clear } from "../store";
+import store, { getUser, clear, fetchUser, updateUser } from "../store";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,9 +11,11 @@ export default class User extends React.Component{
   }
 
   componentDidMount(){
-    axios.get(`/api/users/${this.props.id}`)
-      .then( res => res.data )
-      .then( user => store.dispatch(getUser(user.name)))
+    const id = this.props.id;
+    store.dispatch(fetchUser(id))
+    // axios.get(`/api/users/${this.props.id}`)
+    //   .then( res => res.data )
+    //   .then( user => store.dispatch(getUser(user.name)))
     this.unsubscribe = store.subscribe( () => this.setState(store.getState()));
   }
 
@@ -30,9 +32,11 @@ export default class User extends React.Component{
   update(ev){
     ev.preventDefault();
     const user = this.state.user;
-    axios.put(`/api/users/${this.props.id}`, { name: user })
-      .then( res => res.data )
-      .then( () => document.location.hash ='/')
+    const id = this.props.id;
+    store.dispatch(updateUser(id, user));
+    // axios.put(`/api/users/${this.props.id}`, { name: user })
+    //   .then( res => res.data )
+    //   .then( () => document.location.hash ='/')
   }
 
   render(){
