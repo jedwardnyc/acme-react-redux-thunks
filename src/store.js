@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { thunkMiddleware } from 'redux-thunk';
+import  thunkMiddleware  from 'redux-thunk';
 
 const GOT_USERS_FROM_SERVER = 'GOT_USERS_FROM_SERVER';
 const WRITE_USER = 'WRITE_USER';
