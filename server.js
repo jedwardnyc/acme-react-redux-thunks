@@ -46,6 +46,7 @@ app.use((err,req,res,next)=>{
 });
 
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
+app.use('/public', express.static(path.join(__dirname, '/public')));
 app.use('/vendor', express.static('node_modules'));
 
 const port = process.env.PORT || 3000;
