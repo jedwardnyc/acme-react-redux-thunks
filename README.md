@@ -1,4 +1,4 @@
-# ACME project from React with Redux
-### Weekend project for Fullstack learning how to impliment Redux in React.
+# ACME project for React with Redux and the addition of Thunks. 
+### A refactoring of [this](https://github.com/jedwardnyc/acme-react-with-redux) repo
 
-Live demo [here](https://acme-product-redux.herokuapp.com/#/)
+In-progress *super buggy* demo [here](https://acme-product-redux-thunks.herokuapp.com/#/)
