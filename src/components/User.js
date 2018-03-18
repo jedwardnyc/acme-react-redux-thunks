@@ -13,9 +13,6 @@ export default class User extends React.Component{
   componentDidMount(){
     const id = this.props.id;
     store.dispatch(fetchUser(id))
-    // axios.get(`/api/users/${this.props.id}`)
-    //   .then( res => res.data )
-    //   .then( user => store.dispatch(getUser(user.name)))
     this.unsubscribe = store.subscribe( () => this.setState(store.getState()));
   }
 
@@ -34,9 +31,6 @@ export default class User extends React.Component{
     const user = this.state.user;
     const id = this.props.id;
     store.dispatch(updateUser(id, user));
-    // axios.put(`/api/users/${this.props.id}`, { name: user })
-    //   .then( res => res.data )
-    //   .then( () => document.location.hash ='/')
   }
 
   render(){

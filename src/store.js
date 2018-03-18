@@ -75,13 +75,13 @@ export function addUser(user){
   }
 }
 
-export function deleteUser(user){
+export function deleteUser(user, users){
   return function thunk (dispatch, getStore){
     return axios.delete(`/api/users/${user.id}`)
       .then( res => res.data )
       .then( () => {
-        const users = this.state.users.filter(_user => _user.id === user.id*1 ? false : true)
-        dispatch(getUsers(users)) 
+        const _users = users.filter(_user => _user.id === user.id*1 ? false : true)
+        dispatch(getUsers(_users)) 
       })
   }
 }
@@ -96,7 +96,7 @@ export function fetchUser(id){
 
 export function updateUser(id, user){
   return function thunk (dispatch, getStore){
-    return axios.put(`/api/users/${this.props.id}`, { name: user })
+    return axios.put(`/api/users/${id}`, { name: user })
       .then( res => res.data )
       .then( () => document.location.hash ='/')
   }
