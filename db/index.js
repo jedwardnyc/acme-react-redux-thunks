@@ -6,11 +6,10 @@ const syncAndSeed = () => {
   conn.sync({force: true})
     .then(()=>{
       return Promise.all([
-        User.create({name: faker.internet.userName('jacob', 'rico')}),
-        User.create({name: faker.internet.userName()}),
-        User.create({name: faker.internet.userName()}),
-        User.create({name: faker.internet.userName()}),
-        User.create({name: faker.internet.userName()}),
+        User.create({firstName: 'Jacob', lastName: 'Rico', username: faker.internet.userName('Jacob',"Rico")}),
+        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
+        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
+        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
       ])
     })
 }

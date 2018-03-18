@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import  thunkMiddleware  from 'redux-thunk';
 import axios from 'axios';
+import faker from 'faker';
 
 const GOT_USERS_FROM_SERVER = 'GOT_USERS_FROM_SERVER';
 const WRITE_USER = 'WRITE_USER';
@@ -11,8 +12,8 @@ const ERROR = 'ERROR';
 
 const initialState = {
   users: [],
-  user: '',
-  error: ''
+  user: {},
+  error: '',
 };
 
 const reducer = (state = initialState, action) =>{
@@ -26,7 +27,7 @@ const reducer = (state = initialState, action) =>{
     case CLEAR:
       return Object.assign({}, state, { user:  action.user, error: action.error })
     case ERROR:
-      return Object.assign({}, state, { error: action.error })
+      return Object.assign({}, state, { error: action.error });
     default:
       return state;
   };
@@ -37,7 +38,7 @@ export const getUsers = users => {
 };
 
 export const getUser = user => {
-  return { type: WRITE_USER, user: user };
+  return { type: WRITE_USER, user };
 };
 
 export const getNewUsers = users => {
@@ -49,58 +50,64 @@ export const clear = () => {
 };
 
 export const errorHandler = error => {
-  return { type: ERROR, error: error }
-}
+  return { type: ERROR, error: error };
+};
 
 export function fetchUsers() {
   return function thunk (dispatch, getStore){
     return axios.get('/api/users')
       .then( res => res.data )
       .then( users => {
-        dispatch(getUsers(users))
+        dispatch(getUsers(users));
       })
       .catch(err => dispatch(errorHandler(err.response.data)))
-  } 
-}
+  }; 
+};
 
 export function addUser(user){
+  if(!user.username){
+    user.username = faker.internet.userName(user.firstName, user.lastName)
+  }
   return function thunk (dispatch, getStore){
-    return axios.post('/api/users', { name: user })
+    return axios.post('/api/users',  user )
       .then( res => res.data )
       .then( user => {
-        dispatch(getNewUsers(user)) 
-        dispatch(clear()) 
+        dispatch(getNewUsers(user));
+        dispatch(clear());
       })
       .catch(err => dispatch(errorHandler(err.response.data)))
-  }
-}
+  };
+};
 
-export function deleteUser(user, users){
+export function deleteUser(id, users){
   return function thunk (dispatch, getStore){
-    return axios.delete(`/api/users/${user.id}`)
+    return axios.delete(`/api/users/${id}`)
       .then( res => res.data )
       .then( () => {
-        const _users = users.filter(_user => _user.id === user.id*1 ? false : true)
-        dispatch(getUsers(_users)) 
+        const _users = users.filter(_user => _user.id === id*1 ? false : true);
+        dispatch(getUsers(_users));
       })
-  }
-}
+      .catch(err => dispatch(errorHandler(err.response.data)))
+  };
+};
 
 export function fetchUser(id){
   return function thunk (dispatch, getStore){
     return axios.get(`/api/users/${id}`)
       .then( res => res.data )
-      .then( user => dispatch(getUser(user.name)))
-  }
-}
+      .then( user => dispatch(getUser(user)))
+      .catch( err => dispatch(errorHandler(err.response.data )))
+  };
+};
 
 export function updateUser(id, user){
   return function thunk (dispatch, getStore){
-    return axios.put(`/api/users/${id}`, { name: user })
+    return axios.put(`/api/users/${id}`, user)
       .then( res => res.data )
       .then( () => document.location.hash ='/')
-  }
-}
+      .catch(err => dispatch(errorHandler(err.response.data)))
+  };
+};
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 export default store;
