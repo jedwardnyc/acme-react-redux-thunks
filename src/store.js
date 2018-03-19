@@ -12,7 +12,11 @@ const ERROR = 'ERROR';
 
 const initialState = {
   users: [],
-  user: {},
+  user: {
+    firstName: '',
+    lastName: '',
+    username: ''
+  },
   error: '',
 };
 
@@ -46,7 +50,7 @@ export const getNewUsers = users => {
 }
 
 export const clear = () => {
-  return { type: CLEAR,  user: '', error: '' };
+  return { type: CLEAR,  user: {firstName: '', lastName: '', username: ''}, error: '' };
 };
 
 export const errorHandler = error => {
@@ -73,7 +77,7 @@ export function addUser(user){
       .then( res => res.data )
       .then( user => {
         dispatch(getNewUsers(user));
-        dispatch(clear());
+        dispatch(clear())
       })
       .catch(err => dispatch(errorHandler(err.response.data)))
   };

@@ -44,18 +44,17 @@ export default class Users extends React.Component{
     return(
       <div className='container-fluid'>
         <h1>A Simple List of Users</h1>
-        <form className='form-control form-inline' onSubmit={this.handleSubmit}>
+        <form className='form-control' onSubmit={this.handleSubmit}>
           <div>
             <h2> Create a New User </h2>
           </div>
-          <br/>
           <div>
             <h6>Please enter your full name and a username (if you dont add a username, I'll make one for you): </h6>
           </div>
-          <div>
-            <input className='form-control' name='firstName' id='firstname' onChange={this.handleEvent} placeholder='First Name' />
-            <input className='form-control' name='lastName' onChange={this.handleEvent} placeholder='Last Name' />        
-            <input  className='form-control' name='username' onChange={this.handleEvent} placeholder='User Name' />
+          <div className='form-inline'>
+            <input className='form-control' name='firstName' value={this.state.user.firstName} onChange={this.handleEvent} placeholder='First Name' />
+            <input className='form-control' name='lastName' value={this.state.user.lastName} onChange={this.handleEvent} placeholder='Last Name' />        
+            <input  className='form-control' name='username' value={this.state.user.username} onChange={this.handleEvent} placeholder='User Name' />
             <button className='btn btn-primary'> Create </button>
           </div>
         </form>

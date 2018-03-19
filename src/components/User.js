@@ -37,6 +37,7 @@ export default class User extends React.Component{
   };
 
   render(){
+    console.log(this.state.user)
     return(
       <div className='container-fluid'>
         <h1>Update User? </h1>
@@ -50,7 +51,7 @@ export default class User extends React.Component{
           <input  className='form-control' name='username' value={this.state.user.username} onChange={this.handleEvent} placeholder='User Name' />
           <br />
           <button className='btn btn-success'> Update </button>
-          <button onClick={() => store.dispatch(clear())} className='btn btn-danger'> 
+          <button className='btn btn-danger'> 
             <Link to='/' style={{ color: "white" }}> Cancel </Link>
           </button>
         </form>
