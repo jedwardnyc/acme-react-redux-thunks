@@ -37,7 +37,6 @@ export default class User extends React.Component{
   };
 
   render(){
-    console.log(this.state.user)
     return(
       <div className='container-fluid'>
         <h1>Update User? </h1>
