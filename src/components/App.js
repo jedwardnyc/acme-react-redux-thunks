@@ -1,19 +1,13 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import store, { getUser, getUsers, getNewUsers, deleteUser } from "../store";
 import Users from './Users';
 import User from './User';
-import axios from 'axios';
-import Nav from './Nav';
+// If I end up wanting a Nav
+// import Nav from './Nav';
 
-
-export default class App extends React.Component{
-  constructor(){
-    super();
-    this.state = store.getState();
-  }
-
-  render(){
+  
+const App = () => {
+  
     return (
       <div>
         <Router>
@@ -28,4 +22,5 @@ export default class App extends React.Component{
       </div>
     )
   }
-}
+
+  export default App;

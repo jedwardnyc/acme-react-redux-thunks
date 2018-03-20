@@ -11,6 +11,19 @@ export default class User extends React.Component{
     this.handleEvent = this.handleEvent.bind(this)
   };
 
+/* starting to remove user from global state. It should be located here only
+  constructor(){
+    super();
+    const user = store.getState().users.filter(user => user.id === this.props.id * 1)
+    this.state = {
+      user: user ? user : ''
+      // store.getState();
+    }
+    this.update = this.update.bind(this);
+    this.handleEvent = this.handleEvent.bind(this)
+  };
+*/
+
   componentDidMount(){
     this.unsubscribe = store.subscribe( () => this.setState(store.getState()));
     const id = this.props.id;
@@ -37,6 +50,7 @@ export default class User extends React.Component{
   };
 
   render(){
+
     return(
       <div className='container-fluid'>
         <h1>Update User? </h1>

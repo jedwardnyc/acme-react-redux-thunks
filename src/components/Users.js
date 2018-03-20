@@ -41,9 +41,11 @@ export default class Users extends React.Component{
   };
 
   render(){
+    // I can move the form into another component so it can be used multiple times 
     return(
       <div className='container-fluid'>
-        <h1>A Simple List of Users</h1>
+        <h1>A List of Users</h1>
+        <br />
         <form className='form-control' onSubmit={this.handleSubmit}>
           <div>
             <h2> Create a New User </h2>
@@ -73,9 +75,9 @@ export default class Users extends React.Component{
               return ( 
                 <Link key={user.id} to={`/users/${user.id}`} style={{textDecoration: 'none', color: 'black'}}>
                   <li className="list-group-item" key={user.id} id='user-box'> 
-                    <h5>First Name: {user.firstName}</h5>
-                    <h5>Last Name: {user.lastName}</h5>
-                    <h5>Username: {user.username}</h5>
+                    <h6>First Name: {user.firstName}</h6>
+                    <h6>Last Name: {user.lastName}</h6>
+                    <h6>Username: {user.username}</h6>
                     <button className='btn btn-danger' onClick={(ev) => this.handleDelete(ev, user) }> Delete </button>
                   </li>
                 </Link>

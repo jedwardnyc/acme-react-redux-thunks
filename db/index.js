@@ -7,9 +7,8 @@ const syncAndSeed = () => {
     .then(()=>{
       return Promise.all([
         User.create({firstName: 'Jacob', lastName: 'Rico', username: faker.internet.userName('Jacob',"Rico")}),
-        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
-        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
-        User.create({firstName: faker.name.firstName(), lastName: faker.name.lastName(), username: faker.internet.userName()}),
+        User.create({firstName: 'John', lastName: 'Doe', username: faker.internet.userName('John', 'Doe')}),
+        User.create({firstName: 'Peter', lastName: 'Parker', username: 'DefintelyxNOTxSpiderman'}),
       ])
     })
 }

@@ -9,13 +9,13 @@ const GOT_NEW_USERS = 'GOT_NEW_USERS';
 const CLEAR = 'CLEAR';
 const ERROR = 'ERROR';
 
-
+// State of application should only need users (or users/products) try to remove user and error from here and move elsewhere
 const initialState = {
   users: [],
   user: {
     firstName: '',
     lastName: '',
-    username: ''
+    username: '',
   },
   error: '',
 };
