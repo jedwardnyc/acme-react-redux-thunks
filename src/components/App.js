@@ -14,7 +14,7 @@ const App = () => {
         <div>
         {/* <Nav /> */}
           <div>
-            <Route path='/' exact render = { () => <Users/>}/>
+            <Route exact path='/' render = { () => <Users/>}/>
             <Route path='/users/:id' render = { ({ match }) => <User id={match.params.id} /> }/>
           </div>
         </div>  

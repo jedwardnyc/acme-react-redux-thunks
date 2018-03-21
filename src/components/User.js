@@ -50,7 +50,7 @@ export default class User extends React.Component{
   };
 
   render(){
-
+    
     return(
       <div className='container-fluid'>
         <h1>Update User? </h1>
@@ -63,8 +63,10 @@ export default class User extends React.Component{
           <label>Username: </label>
           <input  className='form-control' name='username' value={this.state.user.username} onChange={this.handleEvent} placeholder='User Name' />
           <br />
-          <button className='btn btn-success'> Update </button>
-          <button className='btn btn-danger'> 
+          <button disabled={ this.state.user.lastName.length === 0 || this.state.user.firstName.length === 0 ? true : false }  className='btn btn-success'> Update </button>
+          {/* &nbsp; will add a REAL space. Not just whitespace */}
+          &nbsp;&nbsp;
+          <button onClick={(ev) => ev.preventDefault()} className='btn btn-danger'>
             <Link to='/' style={{ color: "white" }}> Cancel </Link>
           </button>
         </form>

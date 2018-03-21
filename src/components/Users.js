@@ -20,7 +20,7 @@ export default class Users extends React.Component{
   componentWillUnmount () {
     this.unsubscribe();
   };
-  
+
   handleEvent(ev){
     let prop = ev.target.name
     const user = this.state.user
@@ -54,9 +54,9 @@ export default class Users extends React.Component{
             <h6>Please enter your full name and a username (if you dont add a username, I'll make one for you): </h6>
           </div>
           <div className='form-inline'>
-            <input className='form-control' name='firstName' value={this.state.user.firstName} onChange={this.handleEvent} placeholder='First Name' />
-            <input className='form-control' name='lastName' value={this.state.user.lastName} onChange={this.handleEvent} placeholder='Last Name' />        
-            <input  className='form-control' name='username' value={this.state.user.username} onChange={this.handleEvent} placeholder='User Name' />
+            <input className='form-control' name='firstName' value={this.state.user.firstName} onChange={this.handleEvent} placeholder='First Name' /> &nbsp;
+            <input className='form-control' name='lastName' value={this.state.user.lastName} onChange={this.handleEvent} placeholder='Last Name' /> &nbsp;      
+            <input  className='form-control' name='username' value={this.state.user.username} onChange={this.handleEvent} placeholder='User Name' /> &nbsp;
             <button className='btn btn-primary'> Create </button>
           </div>
         </form>
@@ -71,7 +71,7 @@ export default class Users extends React.Component{
         }
         <ul className="list-group">
           {
-            this.state.users.map(user => {
+            this.state.users.slice(0).reverse().map(user => {
               return ( 
                 <Link key={user.id} to={`/users/${user.id}`} style={{textDecoration: 'none', color: 'black'}}>
                   <li className="list-group-item" key={user.id} id='user-box'> 

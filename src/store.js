@@ -105,6 +105,9 @@ export function fetchUser(id){
 };
 
 export function updateUser(id, user){
+  if(!user.username){
+    user.username = faker.internet.userName(user.firstName, user.lastName)
+  }
   return function thunk (dispatch, getStore){
     return axios.put(`/api/users/${id}`, user)
       .then( res => res.data )
